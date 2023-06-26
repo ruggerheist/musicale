@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {{!-- link to add calendar --}}
+    <link rel="stylesheet" href="../../public/css/calendar.js.css" />
+    <script src="../../public/js/calendar.js"></script>
+</head>
+
+<body>
+    <div id="calendar"></div>
+</body>
+
+</html>
+
+<script>
+    var calendarElement = document.getElementById("calendar");
+    var calendarInstance2 = calendarJs(calendarElement, {
+        manualEditingEnabled: true
+        // All your options can be set here
+    }); 
+</script>
