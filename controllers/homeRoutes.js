@@ -8,4 +8,12 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/calendar", async (req, res) => {
+  try {
+    res.render("calendar");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
