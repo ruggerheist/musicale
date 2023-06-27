@@ -17,17 +17,35 @@ router.get("/calendar", async (req, res) => {
   }
 });
 
-router.get('/searchcity', async (req, res) => {
+router.get('/searchcity/:city', async (req, res) => {
   try {
+    const city = req.params.city;
     const apikey = process.env.API_KEY;
-    const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&city=358&apikey=${apikey}`
+    const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaID=${city}&apikey=${apikey}`;
     const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error('HTTP error! status: ${response.status}');
+    }
+
     const searchData = await response.json();
-    console.log(response);
+    res.status(200).json(searchData);
+    const events = searchData._embedded.events;
+    events.forEach(event => {
+      console.log(event.name);
+      console.log(event.dates.start.localDate);
+      console.log(event._embedded.venues[0].city.name);
+      console.log(event._embedded.venues[0].address.line1);
+      console.log(event._embedded.venues[0].url);
+
+    });
+
   } catch (err) {
+    console.error(err);
     res.status(500).json(err);
   }
 });
+
     
 router.get("/login", async (req, res) => {
   try {
