@@ -21,7 +21,7 @@ router.get('/searchcity/:city', async (req, res) => {
   try {
     const city = req.params.city;
     const apikey = process.env.API_KEY;
-    const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaID=${city}&apikey=${apikey}`;
+    const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=${apikey}&city=${city}`;
     const response = await fetch(apiUrl);
 
     if (!response.ok) {
