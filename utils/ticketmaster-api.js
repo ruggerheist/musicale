@@ -1,20 +1,10 @@
 require('dotenv').config();
+const axios = require('axios');
 
-function searchCity(city) {
-    fetch (`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=358&apikey=${process.env.API_KEY}`)
-        .then(response => {
-            if (!response.ok) {
-                alert("City not found. Please try again.");
-                throw new Error("City not found.");
-                
-            }
-            console.log(response);
-            return response.json();
-        })
-        .then(body => console.log(body))
-        .catch(error => console.error('city not found', error));
+const searchCity = async (city) => {
+    const response = await axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&city=${city}&apikey=${process.env.API_KEY}`)
+    return response;
 };
-searchCity();    
 
 // function searchArtist(artist) {
 //     fetch (`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=${artist}&apikey=${process.env.API_KEY}`)
@@ -67,4 +57,6 @@ searchCity();
 // var venue = searchVenue('Madison Square Garden');
 // console.log(venue);
 
-module.exports = { searchCity };
+module.exports = {
+    searchCity
+};
