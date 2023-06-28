@@ -9,7 +9,7 @@ const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
-const PORT = process.env.PORT || 7777;
+const PORT = process.env.PORT || 3000;
 
 const hbs = exphbs.create({});
 
@@ -30,7 +30,8 @@ const sess = {
 
 app.use(session(sess));
 
-app.engine("handlebars", hbs.engine);
+app.engine("handlebars", hbs.engine) 
+// ({extname:'hbs', defaultLayout: 'base', layoutDir: __dirname+'/views/layouts', partialsDir:path.join(__dirname,'views/partials')}));
 app.set("view engine", "handlebars");
 
 app.use(express.json());

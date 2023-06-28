@@ -1,12 +1,16 @@
-<section>
-    <h2>Login</h2>
+<section
+style="margin:auto; text-align:center"
+class="card">
+<div class="card-body">
+    <h2 class = "card-title">Login</h2>
     <form action="/api/login" method="post" id="logInForm">
-          <label>Email</label>
+          <label class ="card-subtitle mb-2 text-body-secondary">Email</label>
         <input type="email" name="email" id="loginEmail">
         <br>
-          <label>Password</label>
+          <label class ="card-subtitle mb-2 text-body-secondary">Password</label>
         <input type="password" name="password" id="loginPassword">
         <br>
-        <button type="submit" id="logInButton">Log In</button>
+        <button class = 'btn btn-primary' type="submit" id="logInButton">Log In</button>
     </form>
+    </div>
 </section>
