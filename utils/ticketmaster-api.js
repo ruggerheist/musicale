@@ -1,10 +1,33 @@
 require('dotenv').config();
 const axios = require('axios');
 
-const searchCity = async (city) => {
-    const response = await axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&city=${city}&apikey=${process.env.API_KEY}`)
-    return response;
-};
+function displayEvents(events) {
+    const eventName = events._embedded.events.name;
+    eventName.getElementById('');
+    eventName.innerHTML = eventName;
+    events.appendChild(eventName);
+    const eventDate = events._embedded.dates.start.localDate;
+    eventDate.getElementById('');
+    eventDate.innerHTML = eventDate;
+    events.appendChild(eventDate);
+    const eventCity = events._embedded.venues[0].city.name;
+    eventCity.getElementById('');
+    eventDate.innerHTML = eventCity;
+    events.appendChild(eventCity);
+    const eventVenue = events._embedded.venues[0].name + ", " + events._embedded.venues[0].city.name + ", " + events._embedded.venues[0].address.line1; 
+    eventVenue.getElementById('');
+    eventVenue.innerHTML = eventVenue;
+    events.appendChild(eventVenue);
+    const eventUrl = events._embedded.venues[0].url;
+    eventUrl.getElementById('');
+    eventUrl.innerHTML = eventUrl;
+    events.appendChild(eventUrl);
+ };
+
+// const searchCity = async (city) => {
+//     const response = await axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&city=${city}&apikey=${process.env.API_KEY}`)
+//     return response;
+// };
 
 // function searchArtist(artist) {
 //     fetch (`https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&keyword=${artist}&apikey=${process.env.API_KEY}`)
@@ -57,6 +80,4 @@ const searchCity = async (city) => {
 // var venue = searchVenue('Madison Square Garden');
 // console.log(venue);
 
-module.exports = {
-    searchCity
-};
+module.exports = { displayEvents };
