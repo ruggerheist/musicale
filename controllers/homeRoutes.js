@@ -1,5 +1,6 @@
 const router = require("express").Router();
 // const ticketmaster = require("../utils/ticketmaster-api.js");
+const displayEvents = require("../utils/ticketmaster-api.js");
 
 router.get("/", async (req, res) => {
   try {
@@ -42,29 +43,6 @@ router.get('/searchcity/:city', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-function displayEvents(events) {
-    const eventName = events._embedded.events.name;
-    eventName.getElementById('');
-    eventName.innerHTML = eventName;
-    events.appendChild(eventName);
-    const eventDate = events._embedded.dates.start.localDate;
-    eventDate.getElementById('');
-    eventDate.innerHTML = eventDate;
-    events.appendChild(eventDate);
-    const eventCity = events._embedded.venues[0].city.name;
-    eventCity.getElementById('');
-    eventDate.innerHTML = eventCity;
-    events.appendChild(eventCity);
-    const eventVenue = events._embedded.venues[0].name + ", " + events._embedded.venues[0].city.name + ", " + events._embedded.venues[0].address.line1; 
-    eventVenue.getElementById('');
-    eventVenue.innerHTML = eventVenue;
-    events.appendChild(eventVenue);
-    const eventUrl = events._embedded.venues[0].url;
-    eventUrl.getElementById('');
-    eventUrl.innerHTML = eventUrl;
-    events.appendChild(eventUrl);
- }
     
 router.get("/login", async (req, res) => {
   try {
