@@ -28,7 +28,6 @@ router.get('/searchcity/:city', async (req, res) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const searchData = await response.json();
-    // res.status(200).json(searchData);
     const events = searchData._embedded.events;
     console.log(events);
     events.forEach(event => {
@@ -40,11 +39,10 @@ router.get('/searchcity/:city', async (req, res) => {
     });
 
     const renderEvents = events.map( eventData => {
-      // console.log(eventData.get())
-      return {eventData.name,
-        eventData.dates.start.localDate,
-        eventData._embedded.venues[0].name + ", " + eventData._embedded.venues[0].city.name + ", " + eventData._embedded.venues[0].address.line1,
-        eventData._embedded.venues[0].url
+      return { name: eventData.name,
+        date: eventData.dates.start.localDate,
+        venue: eventData._embedded.venues[0].name + ", " + eventData._embedded.venues[0].city.name + ", " + eventData._embedded.venues[0].address.line1,
+        tickets: eventData._embedded.venues[0].url
        }; 
     });
     // console.log(renderEvents);
