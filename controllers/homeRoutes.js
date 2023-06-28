@@ -38,6 +38,8 @@ router.get('/searchcity/:city', async (req, res) => {
       // console.log(event._embedded.venues[0].url);     
     });
 
+    
+
     const renderEvents = events.map( eventData => {
       return { name: eventData.name,
         date: eventData.dates.start.localDate,
