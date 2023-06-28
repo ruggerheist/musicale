@@ -1,6 +1,6 @@
 const router = require("express").Router();
 // const ticketmaster = require("../utils/ticketmaster-api.js");
-const displayEvents = require("../utils/ticketmaster-api.js");
+// const displayEvents = require("../utils/ticketmaster-api.js");
 
 router.get("/", async (req, res) => {
   try {
@@ -28,16 +28,28 @@ router.get('/searchcity/:city', async (req, res) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const searchData = await response.json();
-    res.status(200).json(searchData);
+    // res.status(200).json(searchData);
     const events = searchData._embedded.events;
+    console.log(events);
     events.forEach(event => {
       console.log(event.name);
-      console.log(event.dates.start.localDate);
-      console.log(event._embedded.venues[0].name + ", " + event._embedded.venues[0].city.name + ", " + event._embedded.venues[0].address.line1);
-      console.log(event._embedded.venues[0].url);
-
+      
+      // console.log(event.dates.start.localDate);
+      // console.log(event._embedded.venues[0].name + ", " + event._embedded.venues[0].city.name + ", " + event._embedded.venues[0].address.line1);
+      // console.log(event._embedded.venues[0].url);     
     });
-    displayEvents(events);
+
+    const renderEvents = events.map( eventData => {
+      // console.log(eventData.get())
+      return {eventData.name,
+        eventData.dates.start.localDate,
+        eventData._embedded.venues[0].name + ", " + eventData._embedded.venues[0].city.name + ", " + eventData._embedded.venues[0].address.line1,
+        eventData._embedded.venues[0].url
+       }; 
+    });
+    // console.log(renderEvents);
+    res.render("details", { renderEvents });
+    // displayEvents(events);
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
@@ -59,22 +71,5 @@ router.get("/signup", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-
-    // const eventTime = response.dates;
-
-    // const eventDate = response.dates;
-    // const eventName = response.name;
-    // const eventVenue = response.venue[i].name;
-    // const eventCity = response.city;
-    
-    // const eventImage = response.images[i]
-    // const sales = response.sales;
-    // let searchData = response.json()
-    
-
-    
-
-
 
 module.exports = router;

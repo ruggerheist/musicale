@@ -1,9 +1,8 @@
-require('dotenv').config();
-const axios = require('axios');
+// require('dotenv').config();
 
 function displayEvents(events) {
     const eventName = events._embedded.events.name;
-    eventName.getElementById('');
+    eventName.getElementById('event-name');
     eventName.innerHTML = eventName;
     events.appendChild(eventName);
     const eventDate = events._embedded.dates.start.localDate;
