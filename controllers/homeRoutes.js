@@ -1,6 +1,4 @@
 const router = require("express").Router();
-// const ticketmaster = require("../utils/ticketmaster-api.js");
-// const displayEvents = require("../utils/ticketmaster-api.js");
 
 router.get("/", async (req, res) => {
   try {
@@ -32,19 +30,18 @@ router.get('/searchcity/:city', async (req, res) => {
     console.log(events);
     events.forEach(event => {
       console.log(event.name);
+      console.log(event.url)
       
       // console.log(event.dates.start.localDate);
       // console.log(event._embedded.venues[0].name + ", " + event._embedded.venues[0].city.name + ", " + event._embedded.venues[0].address.line1);
       // console.log(event._embedded.venues[0].url);     
     });
 
-    
-
     const renderEvents = events.map( eventData => {
       return { name: eventData.name,
         date: eventData.dates.start.localDate,
-        venue: eventData._embedded.venues[0].name + ", " + eventData._embedded.venues[0].city.name + ", " + eventData._embedded.venues[0].address.line1,
-        tickets: eventData._embedded.venues[0].url
+        venue: eventData._embedded.venues[0].name + ", " + eventData._embedded.venues[0].address.line1 + ", " + eventData._embedded.venues[0].city.name + "," + eventData._embedded.venues[0].postalCode,
+        tickets: eventData._embedded.attractions[0].url
        }; 
     });
     // console.log(renderEvents);
