@@ -1,12 +1,63 @@
-<section>
-    <h2>Login</h2>
-    <form action="/api/login" method="post" id="logInForm">
-          <label>Email</label>
-        <input type="email" name="email" id="loginEmail">
-        <br>
-          <label>Password</label>
-        <input type="password" name="password" id="loginPassword">
-        <br>
-        <button type="submit" id="logInButton">Log In</button>
-    </form>
-</section>
+<head>
+  <style>
+    body {
+      background: radial-gradient(#292929, #000000);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Arial', sans-serif; /* Changes font */
+    }
+
+    #top-half {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #top-half img {
+      max-width: 100%;
+      max-height: 50vh;
+    }
+
+    .card-title {
+      font-size: 2rem; /* Increase the font size for the card title */
+      font-weight: bold; /* Make the card title bold */
+    }
+
+    .card-subtitle {
+      font-size: 1.2rem; /* Increase the font size for the card subtitles */
+      color: #050a2318; /* Change the color of the card subtitles to blue */
+    }
+
+    #logInButton {
+      background-color: #101948b8; /* Change the background color of the login button to blue */
+      color: #ffffff; /* Change the text color of the login button to white */
+      font-weight: bold; /* Make the login button text bold */
+    }
+  </style>
+</head>
+<body>
+  {{!-- Card container with image--}}
+  <section style="margin: auto; text-align: center;" class="card">
+    <div id="top-half">
+      <img src="https://whatsnewindonesia.com/sites/default/files/styles/1280x800/public/2022-09/hanny-naibaho-aWXVxy8BSzc-unsplash-1024x683.jpg?itok=h0xCpdRD" alt="Cosmic Image">
+    </div>
+    <div class="card-body">
+      <h2 class="card-title">Musicale - Login</h2>
+      <form action="/api/login" method="post" id="logInForm">
+      {{!-- Column to align --}}
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <label class="card-subtitle mb-2 text-body-secondary p-2">Email</label>
+          <input type="email" name="email" id="loginEmail">
+          <br>
+          <label class="card-subtitle mb-2 text-body-secondary p-2">Password</label>
+          <input type="password" name="password" id="loginPassword">
+          <br>
+          <button class="btn btn-primary" type="submit" id="logInButton">Log In</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</body>
