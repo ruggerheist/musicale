@@ -30,7 +30,7 @@ const sess = {
 
 app.use(session(sess));
 
-app.engine("handlebars", hbs.engine) 
+app.engine("handlebars", hbs.engine)
 // ({extname:'hbs', defaultLayout: 'base', layoutDir: __dirname+'/views/layouts', partialsDir:path.join(__dirname,'views/partials')}));
 app.set("view engine", "handlebars");
 
@@ -40,8 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
 
-sequelize.sync({ force: false, alter: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
-    console.log('Musical listening http://127.0.0.1:' + PORT + '/login')
-  );
+    console.log('Musical listening http://127.0.0.1:' + PORT + '/login'));
 });
