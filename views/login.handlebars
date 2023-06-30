@@ -6,7 +6,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-family: 'Arial', sans-serif; /* Changes font */
+      font-family: 'Arial', sans-serif;
+      /* Changes font */
     }
 
     #top-half {
@@ -22,27 +23,37 @@
     }
 
     .card-title {
-      font-size: 2rem; /* Increase the font size for the card title */
-      font-weight: bold; /* Make the card title bold */
+      font-size: 2rem;
+      /* Increase the font size for the card title */
+      font-weight: bold;
+      /* Make the card title bold */
     }
 
     .card-subtitle {
-      font-size: 1.2rem; /* Increase the font size for the card subtitles */
-      color: #050a2318; /* Change the color of the card subtitles to blue */
+      font-size: 1.2rem;
+      /* Increase the font size for the card subtitles */
+      color: #050a2318;
+      /* Change the color of the card subtitles to blue */
     }
 
     #logInButton {
-      background-color: #101948b8; /* Change the background color of the login button to blue */
-      color: #ffffff; /* Change the text color of the login button to white */
-      font-weight: bold; /* Make the login button text bold */
+      background-color: #101948b8;
+      /* Change the background color of the login button to blue */
+      color: #ffffff;
+      /* Change the text color of the login button to white */
+      font-weight: bold;
+      /* Make the login button text bold */
     }
   </style>
 </head>
+
 <body>
-  {{!-- Card container with image--}}
+  <!-- Card container with image -->
   <section style="margin: auto; text-align: center;" class="card">
     <div id="top-half">
-      <img src="https://whatsnewindonesia.com/sites/default/files/styles/1280x800/public/2022-09/hanny-naibaho-aWXVxy8BSzc-unsplash-1024x683.jpg?itok=h0xCpdRD" alt="Cosmic Image">
+      <img
+        src="https://whatsnewindonesia.com/sites/default/files/styles/1280x800/public/2022-09/hanny-naibaho-aWXVxy8BSzc-unsplash-1024x683.jpg?itok=h0xCpdRD"
+        alt="Cosmic Image">
     </div>
     <div class="card-body">
       <h2 class="card-title">Musicale - Login</h2>
@@ -58,6 +69,13 @@
           <button class="btn btn-primary" type="submit" id="logInButton">Log In</button>
         </div>
       </form>
+      <p style="text-align: center; font-size: 14px;">
+        {{!-- first time user; link to signup --}}
+        New here?
+        <a href="http://127.0.0.1:3001/signup" style="color: #007bff; text-decoration: none; font-weight: bold;">
+          Sign up!
+        </a>
+      </p>
     </div>
   </section>
 </body>

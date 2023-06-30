@@ -30,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/ruggerheist/musicale/issues"
   },
-  "homepage": "https://github.com/ruggerheist/musicale#readme"
+  "homepage": "https://github.com/ruggerheist/musicale#readme",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
 }
