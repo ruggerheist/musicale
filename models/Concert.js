@@ -26,7 +26,7 @@ Concert.init(
         },
         ticket_url: {
             type: DataTypes.STRING(2048),
-            allowNull: false,
+            allowNull: true,
         },
     },
     {
