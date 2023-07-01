@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const session = require("express-session");
-const { User } = require("../../models");
+const { User, Concert } = require("../../models");
 
 //endpoint is /api/users
 
@@ -65,5 +65,17 @@ router.post('/', async (req, res) => {
       res.status(404).end();
     }
   });
+
+  router.get('/:id', async (req, res) => {
+    try{
+        const userData = await User.findByPk(req.params.id, {
+            include: [{ model: Concert ,  as: 'users_going_to_concert'}]
+        });
+        res.status(200).json(userData);
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+});
 
 module.exports = router;

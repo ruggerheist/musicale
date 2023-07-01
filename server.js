@@ -44,3 +44,4 @@ sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
     console.log('Musical listening http://127.0.0.1:' + PORT + '/login'));
 });
+
