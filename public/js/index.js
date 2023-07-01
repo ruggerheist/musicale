@@ -40,3 +40,17 @@ const deleteConcert = async (event) => {
         alert('Failed to delete concert');
     }
 };
+
+const userWithConcert = await User.findAll({
+    where: {
+        id: req.session.user_id,
+    },
+    include: [
+        {
+            model: Concert,
+            through: UserConcert,
+            as: 'concerts',
+            attributes: ['id', 'artist', 'date', 'venue', 'ticket_url'],
+        },
+    ],
+});
