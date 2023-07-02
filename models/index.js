@@ -18,7 +18,7 @@ User.belongsToMany(Concert, {
         model: UserConcert,
         unique: false,
     },
-    as: 'users_going_to_concert'
+    as: 'concerts_attended_by_user'
 });
 
 // Concerts belong to many Users (through UserConcert)
@@ -35,7 +35,7 @@ Concert.belongsToMany(User, {
         model: UserConcert,
         unique: false,
     },
-    as: 'concerts_user_going_to'
+    as: 'users_attending_concert'
 });
 
 // // Users belong to many concerts
