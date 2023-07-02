@@ -69,9 +69,11 @@ router.post('/', async (req, res) => {
   router.get('/:id', async (req, res) => {
     try{
         const userData = await User.findByPk(req.params.id, {
-            include: [{ model: Concert ,  as: 'users_going_to_concert'}]
+            include: [{ model: Concert ,  as: 'concerts_attended_by_user'}]
         });
         res.status(200).json(userData);
+        // const concerts = json(userData.concerts_attended_by_user);
+        // console.log(concerts);
     } catch (err) {
         res.status(500).json(err);
         console.log(err);
