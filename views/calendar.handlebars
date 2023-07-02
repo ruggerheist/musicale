@@ -1,3 +1,132 @@
-<div id="calendar"></div>
+<head>
+  <title>Musicale Navigation Bar</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS font that's punk rock 🤘 */
+    body, .navbar-brand, .navbar-subtext, .btn {
+      font-family: "Courier New", monospace;
+    }
 
-<script src = "./js/calendar.js"> </script>  
+    .navbar-brand {
+      font-size: 28px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .navbar-subtext {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .navbar-with-padding {
+      padding-bottom: 20px;
+    }
+
+    /* Custom CSS for search results column */
+    #searchResultsColumn {
+      background: linear-gradient(to bottom, #1a1a1a, #000000);
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    /* Custom CSS for placeholder images */
+    .placeholder-image {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Custom CSS for 'Results' text */
+    #resultsText {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* Custom CSS for 'Date Details' text */
+    #dateDetailsText {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+        /* Custom CSS for date details column */
+    #dateDetailsColumn {
+      background: linear-gradient(to bottom, #1a1a1a, #000000);
+      color: #fff;
+      padding: 20px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-with-padding">
+    <a class="navbar-brand" href="#">Musicale</a>
+    <span class="navbar-subtext">Search for your favorite artist or who's playing in your city!</span>
+
+    <!-- Search Bar -->
+    <form id="searchForm" class="form-inline ml-auto">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+    <!-- Login/Logout Buttons -->
+    <div class="ml-auto">
+      <a id="loginButton" class="btn btn-outline-light" href="http://127.0.0.1:3001/login">Login</a>
+      <button id="logoutButton" class="btn btn-outline-light" type="button">Logout</button>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-2" id="dateDetailsColumn">
+        <!-- 'Date Details' text within the column -->
+        <div id="dateDetailsText">Date Details</div>
+        <!-- Placeholder content -->
+        <p>Some content related to date details can be placed here.</p>
+      </div>
+      <div class="col-4" id="searchResultsColumn">
+        <!-- 'Results' text within the column -->
+        <div id="resultsText">Results</div>
+        <!-- Placeholder images -->
+        <img src="https://www.rollingstone.com/wp-content/uploads/2023/05/Grateful-Dead_RFK-06.10.73-1973-2023-Jonathan-David-Sabin_InfinityPhotoGraphic.com_All-Rights-Reserved.jpg?w=1581&h=1054&crop=1" class="placeholder-image" alt="Placeholder" width="500">
+        <img src="https://media.vogue.fr/photos/61260574c19ededc51bc6917/16:9/w_1920%2Cc_limit/GettyImages-131199355.jpg" class="placeholder-image" alt="Image" width="500">
+        <img src="https://www.billboard.com/wp-content/uploads/media/queen-1978-bw-billboard-1548.jpg?w=942&h=623&crop=1" class="placeholder-image" alt="Image" width="500">
+      </div>
+      <div class="col-6">
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/calendar.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  {{!-- <script>
+    // Logout button click event handler
+    var logoutButton = document.getElementById('logoutButton');
+
+    logoutButton.addEventListener('click', function() {
+      fetch('/logout', {
+        method: 'POST'
+      })
+      .then(function(response) {
+        if (response.ok) {
+          // Successful logout, you can perform any additional actions here
+          window.location.href = 'http://127.0.0.1:3001/login'; // Redirect to login page
+        } else {
+          // Logout failed, handle the error
+          console.error('Logout failed with status ' + response.status);
+        }
+      })
+      .catch(function(error) {
+        console.error('An error occurred during logout:', error);
+      });
+    });
+  </script> --}}
+</body>
