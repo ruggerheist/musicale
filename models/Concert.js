@@ -26,14 +26,7 @@ Concert.init(
         },
         ticket_url: {
             type: DataTypes.STRING(2048),
-            allowNull: false,
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'user',
-                key: 'id',
-            },
+            allowNull: true,
         },
     },
     {

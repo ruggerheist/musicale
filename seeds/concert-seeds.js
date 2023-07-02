@@ -1,4 +1,6 @@
-[
+const { Concert } = require("../models");
+
+const concertData = [
     {
         "artist": "Beyonce - RENAISSANCE WORLD TOUR",
         "date": "2023-07-12",
@@ -16,5 +18,9 @@
         "date": "2023-10-21",
         "venue": "The Met Philadelphia, 858 N Broad St, Philadelphia,19130",
         "ticket_url": "https://www.livenation.com/artist/K8vZ917GFIf/lady-a-events"
-    }
-]
+    },
+];
+
+const seedConcerts = () => Concert.bulkCreate(concertData);
+
+module.exports = seedConcerts;

@@ -1,22 +1,19 @@
-const newSearch = async (event) => {
+const newSaveHandler = async (event) => {
     event.preventDefault();
-
     const search = document.querySelector('#search').value.trim();
     if (search) {
         document.location.replace(`/search/${search}`);
     }
 };
 
-const addConcert = async (event) => {
+const newAddHandler = async (event) => {
     event.preventDefault();
-
     const concert_id = event.target.getAttribute('data-id');
     const response = await fetch(`/api/concerts/${concert_id}`, {
         method: 'PUT',
         body: JSON.stringify({ concert_id }),
         headers: { 'Content-Type': 'application/json' },
     });
-
     if (response.ok) {
         document.location.replace('/profile');
     } else {
@@ -24,16 +21,14 @@ const addConcert = async (event) => {
     }
 };
 
-const deleteConcert = async (event) => {
+const newDeleteHandler = async (event) => {
     event.preventDefault();
-
     const concert_id = event.target.getAttribute('data-id');
     const response = await fetch(`/api/concerts/${concert_id}`, {
         method: 'DELETE',
         body: JSON.stringify({ concert_id }),
         headers: { 'Content-Type': 'application/json' },
     });
-
     if (response.ok) {
         document.location.replace('/profile');
     } else {
@@ -41,16 +36,14 @@ const deleteConcert = async (event) => {
     }
 };
 
-const userWithConcert = await User.findAll({
-    where: {
-        id: req.session.user_id,
-    },
-    include: [
-        {
-            model: Concert,
-            through: UserConcert,
-            as: 'concerts',
-            attributes: ['id', 'artist', 'date', 'venue', 'ticket_url'],
-        },
-    ],
-});
+document
+    .querySelector('')
+    .addEventListener('submit', newSaveHandler);
+
+document
+    .querySelector('')
+    .addEventListener('submit', newAddHandler);
+
+document
+    .querySelector('')
+    .addEventListener('submit', newDeleteHandler);
