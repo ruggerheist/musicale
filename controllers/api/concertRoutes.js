@@ -4,27 +4,24 @@ const withAuth = require('../../utils/auth');
 
 //The /api/concerts endpoint
 
-
-// , withAuth,
-
-// router.get('/', withAuth, async (req, res) => {
-//     try {
-//         const concertData = await Concert.findAll({
-//         where: {
-//             user_id: req.session.user_id
-//         }
-//         });
+router.get('/', withAuth, async (req, res) => {
+    try {
+        const concertData = await Concert.findAll({
+        where: {
+            user_id: req.session.user_id
+        }
+        });
     
-//         const concerts = concertData.map((concert) => concert.get({ plain: true }));
+        const concerts = concertData.map((concert) => concert.get({ plain: true }));
     
-//         res.render('concerts', {
-//         concerts,
-//         logged_in: req.session.logged_in
-//         });
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-// });
+        res.render('concerts', {
+        concerts,
+        logged_in: req.session.logged_in
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 router.post('/', withAuth, async (req, res) => {
     try {
