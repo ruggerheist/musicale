@@ -66,6 +66,7 @@ router.post('/', async (req, res) => {
     }
   });
 
+  // get for all concerts by a specific user 
   router.get('/:id', async (req, res) => {
     try{
         const userData = await User.findByPk(req.params.id, {
