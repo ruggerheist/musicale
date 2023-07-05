@@ -11,14 +11,18 @@ router.get("/", async (req, res) => {
 router.get("/calendar", async (req, res) => {
   try {
     res.render("calendar");
+    
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+
 router.get('/searchcity/:city', async (req, res) => {
   try {
     const city = req.params.city;
+    // const city = document.getElementsByClassName("form-control").value;
+    // req.params.city = city;
     const apikey = process.env.API_KEY;
     const apiUrl = `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&apikey=${apikey}&city=${city}`;
     const response = await fetch(apiUrl);
@@ -27,15 +31,14 @@ router.get('/searchcity/:city', async (req, res) => {
     }
     const searchData = await response.json();
     const events = searchData._embedded.events;
-    console.log(events);
-    events.forEach(event => {
-      console.log(event.name);
-      console.log(event.url)
+    // events.forEach(event => {
+    //   // console.log(event.name);
+    //   // console.log(event.url)
       
-      // console.log(event.dates.start.localDate);
-      // console.log(event._embedded.venues[0].name + ", " + event._embedded.venues[0].city.name + ", " + event._embedded.venues[0].address.line1);
-      // console.log(event._embedded.venues[0].url);     
-    });
+    //   // console.log(event.dates.start.localDate);
+    //   // console.log(event._embedded.venues[0].name + ", " + event._embedded.venues[0].city.name + ", " + event._embedded.venues[0].address.line1);
+    //   // console.log(event._embedded.venues[0].url);     
+    // });
 
     const renderEvents = events.map( eventData => {
       return { name: eventData.name,
@@ -45,7 +48,7 @@ router.get('/searchcity/:city', async (req, res) => {
        }; 
     });
     // console.log(renderEvents);
-    res.render("details", { renderEvents });
+    res.json(JSON.stringify(renderEvents));
     // displayEvents(events);
   } catch (err) {
     console.error(err);
