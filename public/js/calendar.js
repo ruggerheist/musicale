@@ -1,14 +1,25 @@
-document.addEventListener('DOMContentLoaded', function () {
+// Purpose: To render the calendar on the user's profile page
+import { newSearchHandler } from './handlers.js';
+
+document.addEventListener('DOMContentLoaded', async function () {
+  var searchButton = document.getElementById('search-button');
+  searchButton.addEventListener('click', function (event) { newSearchHandler(event) });
   var calendarEl = document.getElementById('calendar');
-  // var response = fetch(`api/users/${id}`, {
-  //   method: "GET"
-  // });
-  // var event = response.json();
-  // console.log(event);
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth', 
-    // events: event.concerts_attended_by_user
+  const response = await fetch(`api/users/concerts`, {
+    method: "GET"
   });
-  calendar.render();
+  if (response.ok) {
+    const userConcertsData = await response.json();
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: userConcertsData,
+    });
+    calendar.render();
+  } else {
+    alert('Error in getting concerts!')
+  }
 });
+
+
+
 

@@ -11,20 +11,20 @@ Concert.init(
             primaryKey: true, 
             autoIncrement: true,
         },
-        artist: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
 
         },
-        date: {
+        start: {
             type: DataTypes.DATEONLY,
             allowNull: false,
         },
-        venue: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        ticket_url: {
+        // venue: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        // },
+        url: {
             type: DataTypes.STRING(2048),
             allowNull: true,
         },
