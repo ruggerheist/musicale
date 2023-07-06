@@ -10,7 +10,7 @@ const newAddHandler = async (event) => {
     event.preventDefault();
     const concert_id = event.target.getAttribute('data-id');
     const response = await fetch(`/api/concerts/${concert_id}`, {
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({ concert_id }),
         headers: { 'Content-Type': 'application/json' },
     });
@@ -36,24 +36,40 @@ const newDeleteHandler = async (event) => {
     }
 };
 
+//wrote this function for the save button on the calendar
+async function calendarSaveHandler(title, start, url) {
+    const response = await fetch(`/api/concerts`, {
+        method: 'POST',
+        body: JSON.stringify({ title, start, url }),
+        headers: { 'Content-Type': 'application/json' },
+    });
+    if (response.ok) {
+        document.location.replace('/profile');
+    } else {
+        alert('Failed to save concert');
+    }
+}
+
 export async function newSearchHandler(event) {
+    const userIdEl = document.querySelector('#userId');
+    const userId = userIdEl.dataset.id;
     event.preventDefault();
     let renderEvents;
     const searchInput = document.querySelector('#search-input').value.trim();
     if (!searchInput) {
         alert('Please enter a search term');
-      } else {
-     const response = await fetch(`/searchCity/${searchInput}`, {
+    } else {
+        const response = await fetch(`/searchCity/${searchInput}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-        });  
+        });
         if (response.ok) {
-            renderEvents = await response.json(); 
-        const eventDetails = document.querySelector('.mt-4');
-        let parsedEvents = JSON.parse(renderEvents);
-        console.log(parsedEvents);
-        parsedEvents.forEach((renderEvent) => {           
-            eventDetails.innerHTML += `
+            renderEvents = await response.json();
+            const eventDetails = document.querySelector('.mt-4');
+            let parsedEvents = JSON.parse(renderEvents);
+            console.log(parsedEvents);
+            parsedEvents.forEach((renderEvent) => {
+                eventDetails.innerHTML += `
             <div class="col-2" id="dateDetailsColumn">
                 <div id="dateDetailsText">${renderEvent.date}</div>          
             </div>           
@@ -63,20 +79,23 @@ export async function newSearchHandler(event) {
                 <h6 class="card-subtitle mb-2 text-muted">${renderEvent.venue}</h6>
                 <p class="card-text">${renderEvent.date}</p>
                 <a href="${renderEvent.tickets}" class="card-link">Tickets</a>
+                
+                    <button onclick="${calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets)} type="submit" class="btn btn-primary" id="save-button">Add Event to Calendar</button>
+                
             </div>    
 
             </div>
             `;
-            
-            //add event images in div ^^^
-        });
-    } else {
-        alert('Failed to search');
-    }
-};
-};
-   
 
+                //add event images in div ^^^
+            });
+        } else {
+            alert('Failed to search');
+        }
+    };
+};
+
+{/* <form action="/api/concerts/${renderEvent.name}/${renderEvent.date}/${renderEvent.tickets}" method="post"></form> */}
 // document
 //     .querySelector('')
 //     .addEventListener('submit', newSaveHandler);
