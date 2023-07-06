@@ -98,34 +98,9 @@ export async function newSearchHandler(event) {
                 addButton.addEventListener('click', function () {
                     calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets);
                     document.location.replace('/calendar')
-                 });
-
+                });
                 searchResultsDiv.append(cardBodyDiv, addButton)
                 eventsContainer.append(dateDetailsDiv, searchResultsDiv)
-
-
-//                 eventDetails.innerHTML += `
-//             <div class="col-2" id="dateDetailsColumn">
-//                 <div id="dateDetailsText">${renderEvent.date}</div>          
-//             </div>           
-//             <div class="col-4" id="searchResultsColumn">
-//                 <div class="card-body">
-//                 <h5 class="card-title">${renderEvent.name}</h5>
-//                 <h6 class="card-subtitle mb-2 text-muted">${renderEvent.venue}</h6>
-//                 <p class="card-text">${renderEvent.date}</p>
-//                 <a href="${renderEvent.tickets}" class="card-link">Tickets</a>
-                
-                 
-                
-//                 </div>    
-//                 <button type="button" class="btn btn-primary" id="save-button">Add Event to Calendar</button> 
-            
-//             </div>
-//             `;
-//             //add event images in div ^^^
-// document.getElementById('save-button').addEventListener('click', function () {
-//                calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets);
-//             });
             });
         } else {
             alert('Failed to search');
@@ -134,8 +109,6 @@ export async function newSearchHandler(event) {
 };
 
 
-
-{/* <form action="/api/concerts/${renderEvent.name}/${renderEvent.date}/${renderEvent.tickets}" method="post"></form> */ }
 // document
 //     .querySelector('')
 //     .addEventListener('submit', newSaveHandler);

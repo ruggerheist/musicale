@@ -20,10 +20,6 @@ Concert.init(
             type: DataTypes.DATEONLY,
             allowNull: false,
         },
-        // venue: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        // },
         url: {
             type: DataTypes.STRING(2048),
             allowNull: true,
