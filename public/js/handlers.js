@@ -46,7 +46,7 @@ async function calendarSaveHandler(title, start, url) {
     if (response.ok) {
         // document.location.replace('/profile');
         const data = await response.json()
-        console.log('saved', data)
+        // console.log('saved', data)
     } else {
         alert('Failed to save concert');
     }
@@ -71,7 +71,7 @@ export async function newSearchHandler(event) {
             const eventsContainer = document.getElementById('event-results')
             eventsContainer.innerHTML = ''
             let parsedEvents = JSON.parse(renderEvents);
-            console.log(parsedEvents);
+            // console.log(parsedEvents);
             // eventDetails.innerHTML = ''
             parsedEvents.forEach((renderEvent) => {
                 const dateDetailsDiv = document.createElement('div')
@@ -93,10 +93,11 @@ export async function newSearchHandler(event) {
                 <h6 class="card-subtitle mb-2 text-muted">${renderEvent.venue}</h6>
                 <p class="card-text">${renderEvent.date}</p>
                 <a href="${renderEvent.tickets}" class="card-link">Tickets</a>`
-
+                // console.log('render', renderEvent.name)
                 addButton.textContent = 'Add Event To Calendar'
                 addButton.addEventListener('click', function () {
                     calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets);
+                    document.location.replace('/calendar')
                  });
 
                 searchResultsDiv.append(cardBodyDiv, addButton)
