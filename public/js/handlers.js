@@ -44,7 +44,9 @@ async function calendarSaveHandler(title, start, url) {
         headers: { 'Content-Type': 'application/json' },
     });
     if (response.ok) {
-        document.location.replace('/profile');
+        // document.location.replace('/profile');
+        const data = await response.json()
+        console.log('saved', data)
     } else {
         alert('Failed to save concert');
     }
@@ -65,32 +67,64 @@ export async function newSearchHandler(event) {
         });
         if (response.ok) {
             renderEvents = await response.json();
-            const eventDetails = document.querySelector('.mt-4');
+            // const eventDetails = document.querySelector('.mt-4');
+            const eventsContainer = document.getElementById('event-results')
+            eventsContainer.innerHTML = ''
             let parsedEvents = JSON.parse(renderEvents);
             console.log(parsedEvents);
+            // eventDetails.innerHTML = ''
             parsedEvents.forEach((renderEvent) => {
-                eventDetails.innerHTML += `
-            <div class="col-2" id="dateDetailsColumn">
-                <div id="dateDetailsText">${renderEvent.date}</div>          
-            </div>           
-            <div class="col-4" id="searchResultsColumn">
-                <div class="card-body">
-                <h5 class="card-title">${renderEvent.name}</h5>
+                const dateDetailsDiv = document.createElement('div')
+                const searchResultsDiv = document.createElement('div')
+                const cardBodyDiv = document.createElement('div')
+                const addButton = document.createElement('button')
+
+                dateDetailsDiv.classList.add('col-2')
+                searchResultsDiv.classList.add('col-4')
+                cardBodyDiv.classList.add('card-body')
+                addButton.classList.add('btn', 'btn-primary')
+
+                dateDetailsDiv.id = 'dateDetailsColumn'
+                searchResultsDiv.id = 'searchResultsColumn'
+                addButton.id = 'save-button'
+
+                dateDetailsDiv.innerHTML = `<div id="dateDetailsText">${renderEvent.date}</div>`
+                cardBodyDiv.innerHTML = `<h5 class="card-title">${renderEvent.name}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${renderEvent.venue}</h6>
                 <p class="card-text">${renderEvent.date}</p>
-                <a href="${renderEvent.tickets}" class="card-link">Tickets</a>
+                <a href="${renderEvent.tickets}" class="card-link">Tickets</a>`
+
+                addButton.textContent = 'Add Event To Calendar'
+                addButton.addEventListener('click', function () {
+                    calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets);
+                 });
+
+                searchResultsDiv.append(cardBodyDiv, addButton)
+                eventsContainer.append(dateDetailsDiv, searchResultsDiv)
+
+
+//                 eventDetails.innerHTML += `
+//             <div class="col-2" id="dateDetailsColumn">
+//                 <div id="dateDetailsText">${renderEvent.date}</div>          
+//             </div>           
+//             <div class="col-4" id="searchResultsColumn">
+//                 <div class="card-body">
+//                 <h5 class="card-title">${renderEvent.name}</h5>
+//                 <h6 class="card-subtitle mb-2 text-muted">${renderEvent.venue}</h6>
+//                 <p class="card-text">${renderEvent.date}</p>
+//                 <a href="${renderEvent.tickets}" class="card-link">Tickets</a>
                 
                  
-<button type="submit" class="btn btn-primary" id="save-button">Add Event to Calendar</button> 
                 
-            </div>    
+//                 </div>    
+//                 <button type="button" class="btn btn-primary" id="save-button">Add Event to Calendar</button> 
             
-            </div>
-            `;
-            //add event images in div ^^^
-document.getElementById('save-button').addEventListener('click', function () {
-               calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets);
-            });
+//             </div>
+//             `;
+//             //add event images in div ^^^
+// document.getElementById('save-button').addEventListener('click', function () {
+//                calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets);
+//             });
             });
         } else {
             alert('Failed to search');

@@ -6,7 +6,8 @@ const withAuth = require('../../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
     try {
-        const concertData = await Concert.findAll({
+        //we need to use UserConcert because that is what has the association with the user
+        const concertData = await UserConcert.findAll({
         where: {
             user_id: req.session.user_id
         }
@@ -26,13 +27,27 @@ router.get('/', withAuth, async (req, res) => {
 router.post('/', withAuth, async (req, res) => {
     console.log(res);
     try {
-        //should concert be UserConcert? bug on calendar when concert results render
-        const newConcert = await Concert.create({
-        ...req.body,
+        const existingConcert = await Concert.findOne({
+            where: {
+                title: req.body.title
+            }
+        })
+        console.log(existingConcert)
+        let newConcert;
+        if (!existingConcert) {
+            newConcert = await Concert.create(req.body)
+        }
+        //should concert be UserConcert? bug on calendar when concert results render (YESSS)
+        const newUserConcert = await UserConcert.create({
         user_id: req.session.user_id,
+        concert_id: existingConcert ? existingConcert.id : newConcert.id
         });
     
-        res.status(200).json(newConcert);
+        res.status(200).json({
+            title: existingConcert ? existingConcert.title : newConcert.title,
+            url: existingConcert ? existingConcert.url : newConcert.url,
+            start: existingConcert ? existingConcert.start : newConcert.start
+        });
     } catch (err) {
         res.status(400).json(err);
     }
