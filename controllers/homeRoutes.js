@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
 router.get("/calendar", async (req, res) => {
   try {
-    console.log(req.session.user_id);
+    // console.log(req.session.user_id);
     res.render("calendar", {user_id: req.session.user_id});
     
   } catch (err) {
@@ -42,11 +42,17 @@ router.get('/searchcity/:city', async (req, res) => {
     // });
 
     const renderEvents = events.map( eventData => {
-      console.log(eventData);
+      console.log(eventData._embedded);
+      let ticketData;
+      try {
+        ticketData = eventData._embedded.attractions[0].url;
+      } catch (err) {
+        ticketData = "No tickets available";
+      }
       return { name: eventData.name,
         date: eventData.dates.start.localDate,
         venue: eventData._embedded.venues[0].name + ", " + eventData._embedded.venues[0].address.line1 + ", " + eventData._embedded.venues[0].city.name + "," + eventData._embedded.venues[0].postalCode,
-        tickets: eventData._embedded.attractions[0].url
+        tickets: ticketData
        }; 
     });
     // console.log(renderEvents);

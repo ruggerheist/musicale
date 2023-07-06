@@ -46,7 +46,7 @@ async function calendarSaveHandler(title, start, url) {
     if (response.ok) {
         // document.location.replace('/profile');
         const data = await response.json()
-        console.log('saved', data)
+        // console.log('saved', data)
     } else {
         alert('Failed to save concert');
     }
@@ -71,7 +71,7 @@ export async function newSearchHandler(event) {
             const eventsContainer = document.getElementById('event-results')
             eventsContainer.innerHTML = ''
             let parsedEvents = JSON.parse(renderEvents);
-            console.log(parsedEvents);
+            // console.log(parsedEvents);
             // eventDetails.innerHTML = ''
             parsedEvents.forEach((renderEvent) => {
                 const dateDetailsDiv = document.createElement('div')
