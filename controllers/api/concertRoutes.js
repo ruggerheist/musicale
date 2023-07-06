@@ -25,7 +25,7 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 router.post('/', withAuth, async (req, res) => {
-    console.log(res);
+    // console.log(res);
     try {
         const existingConcert = await Concert.findOne({
             where: {
