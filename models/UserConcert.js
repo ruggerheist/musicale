@@ -4,7 +4,6 @@ const sequelize = require('../config/connection');
 class UserConcert extends Model { }
 
 UserConcert.init(
-
     {
         id: {
             type: DataTypes.INTEGER,

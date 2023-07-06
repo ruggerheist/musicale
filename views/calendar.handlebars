@@ -71,8 +71,8 @@
 
     <!-- Search Bar -->
     <form id="searchForm" class="form-inline ml-auto">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control mr-sm-2" type="search" id="search-input" .forplaceholder="Search" aria-label="Search">
+      <button class="btn btn-outline-light my-2 my-sm-0" id="search-button" type="submit">Search</button>
     </form>
 
     <!-- Login/Logout Buttons -->
@@ -84,27 +84,16 @@
 
   <div class="container mt-4">
     <div class="row">
-      <div class="col-2" id="dateDetailsColumn">
-        <!-- 'Date Details' text within the column -->
-        <div id="dateDetailsText">Date Details</div>
-        <!-- Placeholder content -->
-        <p>Some content related to date details can be placed here.</p>
-      </div>
-      <div class="col-4" id="searchResultsColumn">
-        <!-- 'Results' text within the column -->
-        <div id="resultsText">Results</div>
-        <!-- Placeholder images -->
-        <img src="https://www.rollingstone.com/wp-content/uploads/2023/05/Grateful-Dead_RFK-06.10.73-1973-2023-Jonathan-David-Sabin_InfinityPhotoGraphic.com_All-Rights-Reserved.jpg?w=1581&h=1054&crop=1" class="placeholder-image" alt="Placeholder" width="500">
-        <img src="https://media.vogue.fr/photos/61260574c19ededc51bc6917/16:9/w_1920%2Cc_limit/GettyImages-131199355.jpg" class="placeholder-image" alt="Image" width="500">
-        <img src="https://www.billboard.com/wp-content/uploads/media/queen-1978-bw-billboard-1548.jpg?w=942&h=623&crop=1" class="placeholder-image" alt="Image" width="500">
-      </div>
+     
       <div class="col-6">
         <div id="calendar"></div>
+        <input type="hidden" data-id={{user_id}} id="userId" />
       </div>
     </div>
   </div>
 
-  <script src="./js/calendar.js"></script>
+  <script type="module" src="./js/calendar.js"></script>
+  <script type="module" src="./js/handlers.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
   {{!-- <script>
@@ -128,5 +117,7 @@
         console.error('An error occurred during logout:', error);
       });
     });
+    
   </script> --}}
+  
 </body>
