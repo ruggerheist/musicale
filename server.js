@@ -3,7 +3,6 @@ const express = require("express");
 const session = require("express-session");
 const exphbs = require("express-handlebars");
 const routes = require("./controllers");
-// const helpers = require("./utils/helpers");
 
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -31,7 +30,6 @@ const sess = {
 app.use(session(sess));
 
 app.engine("handlebars", hbs.engine)
-// ({extname:'hbs', defaultLayout: 'base', layoutDir: __dirname+'/views/layouts', partialsDir:path.join(__dirname,'views/partials')}));
 app.set("view engine", "handlebars");
 
 app.use(express.json());
