@@ -6,6 +6,7 @@ const withAuth = require('../../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
     try {
+        //we need to use UserConcert because that is what has the association with the user
         const concertData = await UserConcert.findAll({
         where: {
             user_id: req.session.user_id
