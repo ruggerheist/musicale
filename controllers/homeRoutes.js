@@ -10,7 +10,8 @@ router.get("/", async (req, res) => {
 
 router.get("/calendar", async (req, res) => {
   try {
-    res.render("calendar");
+    console.log(req.session.user_id);
+    res.render("calendar", {user_id: req.session.user_id});
     
   } catch (err) {
     res.status(500).json(err);
@@ -41,6 +42,7 @@ router.get('/searchcity/:city', async (req, res) => {
     // });
 
     const renderEvents = events.map( eventData => {
+      console.log(eventData);
       return { name: eventData.name,
         date: eventData.dates.start.localDate,
         venue: eventData._embedded.venues[0].name + ", " + eventData._embedded.venues[0].address.line1 + ", " + eventData._embedded.venues[0].city.name + "," + eventData._embedded.venues[0].postalCode,
