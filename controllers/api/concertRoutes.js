@@ -24,8 +24,9 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 router.post('/', withAuth, async (req, res) => {
-    console.log(req.body);
+    console.log(res);
     try {
+        //should concert be UserConcert? bug on calendar when concert results render
         const newConcert = await Concert.create({
         ...req.body,
         user_id: req.session.user_id,
