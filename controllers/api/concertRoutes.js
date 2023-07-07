@@ -29,7 +29,7 @@ router.post('/', withAuth, async (req, res) => {
     try {
         const existingConcert = await Concert.findOne({
             where: {
-                title: req.body.title
+                event_id: req.body.event_id
             }
         })
         console.log(existingConcert)
@@ -46,7 +46,8 @@ router.post('/', withAuth, async (req, res) => {
         res.status(200).json({
             title: existingConcert ? existingConcert.title : newConcert.title,
             url: existingConcert ? existingConcert.url : newConcert.url,
-            start: existingConcert ? existingConcert.start : newConcert.start
+            start: existingConcert ? existingConcert.start : newConcert.start,
+            event_id: existingConcert ? existingConcert.event_id : newConcert.event_id
         });
     } catch (err) {
         res.status(400).json(err);

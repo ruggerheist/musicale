@@ -37,12 +37,13 @@ const newDeleteHandler = async (event) => {
 };
 
 //wrote this function for the save button on the calendar
-async function calendarSaveHandler(title, start, url) {
+async function calendarSaveHandler(title, start, url, event_id) {
     const response = await fetch(`/api/concerts`, {
         method: 'POST',
-        body: JSON.stringify({ title, start, url }),
+        body: JSON.stringify({ title, start, url, event_id }),
         headers: { 'Content-Type': 'application/json' },
     });
+    console.log(response);
     if (response.ok) {
         // document.location.replace('/profile');
         const data = await response.json()
@@ -96,7 +97,7 @@ export async function newSearchHandler(event) {
                 // console.log('render', renderEvent.name)
                 addButton.textContent = 'Add Event To Calendar'
                 addButton.addEventListener('click', function () {
-                    calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets);
+                    calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets, renderEvent.event_id);
                     document.location.replace('/calendar')
                 });
                 searchResultsDiv.append(cardBodyDiv, addButton)
