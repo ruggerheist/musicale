@@ -89,17 +89,17 @@ router.post('/logout', (req, res) => {
 });
 
 // get for all concerts by a specific user 
-// router.get('/:id', async (req, res) => {
-//   try {
-//     const userData = await UserConcert.findAll({
-//       where: { user_id: req.params.id },
-//       include: [{ model: Concert, as: 'concerts_attended_by_user' }]
-//     });
-//     res.status(200).json(userData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//     console.log(err);
-//   }
-// });
+router.get('/:id', async (req, res) => {
+  try {
+    const userData = await UserConcert.findAll({
+      where: { user_id: req.params.id },
+      include: [{ model: Concert, as: 'concerts_attended_by_user' }]
+    });
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+});
 
 module.exports = router;
