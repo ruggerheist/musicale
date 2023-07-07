@@ -24,6 +24,10 @@ Concert.init(
             type: DataTypes.STRING(2048),
             allowNull: true,
         },
+        event_id: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },            
     },
     {
         sequelize,

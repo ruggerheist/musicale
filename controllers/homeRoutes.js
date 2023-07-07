@@ -16,7 +16,6 @@ router.get("/calendar", async (req, res) => {
   }
 });
 
-
 router.get('/searchcity/:city', async (req, res) => {
   try {
     const city = req.params.city;
@@ -40,7 +39,8 @@ router.get('/searchcity/:city', async (req, res) => {
         name: eventData.name,
         date: eventData.dates.start.localDate,
         venue: eventData._embedded.venues[0].name + ", " + eventData._embedded.venues[0].address.line1 + ", " + eventData._embedded.venues[0].city.name + "," + eventData._embedded.venues[0].postalCode,
-        tickets: ticketData
+        tickets: ticketData, 
+        event_id: eventData.id
       };
     });
     res.json(JSON.stringify(renderEvents));
