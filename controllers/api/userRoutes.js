@@ -55,26 +55,38 @@ router.post('/login', async (req, res) => {
 // get for all concerts by a specific user. see calendar.js for eventListener
 router.get('/concerts', async (req, res) => {
   try {
-    const userData = await User.findOne(req.params.id, {
-      include: [{ model: Concert, as: 'concerts_attended_by_user' }]
+    const userData = await User.findByPk(req.session.user_id, {
+      include: [{
+        model: Concert,
+        as: 'concerts_attended_by_user'}]
     });
-    const userId = userData.dataValues.id;
-    const userConcerts = await UserConcert.findAll({
-      where: { user_id: userId },
-      attributes: ['concert_id'],
-    });
-    let userConcertIds = [];
-    userConcerts.forEach((concert) => {
-      userConcertIds.push(concert.dataValues.concert_id);
-    });
-    const userConcertsData = await Concert.findAll({
-      where: { id: userConcertIds },
-    });
-    res.status(200).json(userConcertsData);
+    res.status(200).json(userData.concerts_attended_by_user);
   } catch (err) {
     res.status(500).json(err);
     console.log(err);
   }
+  // try {
+  //   const userData = await User.findOne(req.session.id, {
+  //     include: [{ model: Concert, as: 'concerts_attended_by_user' }]
+  //   });
+  //   const userId = userData.dataValues.id;
+  //   const userConcerts = await UserConcert.findAll({
+  //     where: { user_id: userId },
+  //     attributes: ['concert_id'],
+  //   });
+  //   let userConcertData = [];
+  //   userConcerts.forEach(async (concert) => {
+  //     const concertData = await Concert.findOne({
+  //       where: { id: concert.dataValues.concert_id },
+  //     });
+  //     userConcertData.push(concertData.dataValues)
+  //   });
+
+  //   res.status(200).json(userConcertData);
+  // } catch (err) {
+  //   res.status(500).json(err);
+  //   console.log(err);
+  // }
 });
 
 //logout
@@ -89,17 +101,17 @@ router.post('/logout', (req, res) => {
 });
 
 // get for all concerts by a specific user 
-router.get('/:id', async (req, res) => {
-  try {
-    const userData = await UserConcert.findAll({
-      where: { user_id: req.params.id },
-      include: [{ model: Concert, as: 'concerts_attended_by_user' }]
-    });
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-    console.log(err);
-  }
-});
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const userData = await UserConcert.findAll({
+//       where: { user_id: req.session.id },
+//       include: [{ model: Concert, as: 'concerts_attended_by_user' }]
+//     });
+//     res.status(200).json(userData);
+//   } catch (err) {
+//     res.status(500).json(err);
+//     console.log(err);
+//   }
+// });
 
 module.exports = router;
