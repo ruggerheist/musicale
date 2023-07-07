@@ -31,7 +31,7 @@ router.get('/searchcity/:city', async (req, res) => {
       console.log(eventData._embedded);
       let ticketData;
       try {
-        ticketData = eventData._embedded.attractions[0].url;
+        ticketData = eventData.url;
       } catch (err) {
         ticketData = "No tickets available";
       }
