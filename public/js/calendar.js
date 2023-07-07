@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', async function () {
       initialView: 'dayGridMonth',
       events: userConcertsData,
     });
+
+    // styling for calendar
+  // calendarEl.style.display = 'block'; 
+  calendarEl.style.width = '800px';
+  calendarEl.style.marginLeft = '150px';
+
     calendar.render();
   } else {
     alert('Error in getting concerts!')
