@@ -80,6 +80,10 @@ export async function newSearchHandler(event) {
                                           <a href="${renderEvent.tickets}" class="card-link">Tickets</a>`;
         addButton.textContent = 'Add Event To Calendar';
         addButton.addEventListener('click', function () {
+          // Might be able to add html/js to .name to create a button in the displayed calendar event.
+          // Tested the above. Doesn't work because calendar renders html as plain text.
+          // Might be able to add an eventMouseEnter function -- trying to find event creation point to do so.
+          // Might also be able to add an event listner after page render/update
           calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets, renderEvent.event_id);
           document.location.replace('/calendar');
         });
