@@ -65,6 +65,22 @@ router.get('/concerts', async (req, res) => {
     res.status(500).json(err);
     console.log(err);
   }
+  // logout
+router.post('/logout', async (req, res) => {
+  try {
+    if (req.session.logged_in) {
+      req.session.destroy(() => {
+        res.status(204).end();
+      });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+});
+
   // try {
   //   const userData = await User.findOne(req.session.id, {
   //     include: [{ model: Concert, as: 'concerts_attended_by_user' }]
@@ -89,16 +105,6 @@ router.get('/concerts', async (req, res) => {
   // }
 });
 
-//logout
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
 
 // get for all concerts by a specific user 
 // router.get('/:id', async (req, res) => {

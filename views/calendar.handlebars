@@ -99,28 +99,27 @@
   <script type="module" src="./js/handlers.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-  {{!-- <script>
-    // Logout button click event handler
-    var logoutButton = document.getElementById('logoutButton');
+<script>
+  // Logout button
+  var logoutButton = document.getElementById('logoutButton');
 
-    logoutButton.addEventListener('click', function() {
-      fetch('/logout', {
-        method: 'POST'
-      })
-      .then(function(response) {
-        if (response.ok) {
-          // Successful logout, you can perform any additional actions here
-          window.location.href = 'http://127.0.0.1:3001/login'; // Redirect to login page
-        } else {
-          // Logout failed, handle the error
-          console.error('Logout failed with status ' + response.status);
-        }
-      })
-      .catch(function(error) {
-        console.error('An error occurred during logout:', error);
-      });
+  logoutButton.addEventListener('click', function() {
+    fetch('/logout', {
+      method: 'POST',
+      credentials: 'same-origin' // <-- includes cookies in the request
+    })
+    .then(function(response) {
+      if (response.ok) {
+        // Successful logout? Send the user back to the login page
+        window.location.href = '/login'; // Redirect to login page
+      } else {
+        // Logout failed, handle the error
+        console.error('Logout failed with status ' + response.status);
+      }
+    })
+    .catch(function(error) {
+      console.error('An error occurred during logout:', error);
     });
-    
-  </script> --}}
-  
+  });
+</script>
 </body>
