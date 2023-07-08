@@ -6,21 +6,6 @@ const newSaveHandler = async (event) => {
   }
 };
 
-const newAddHandler = async (event) => {
-  event.preventDefault();
-  const concert_id = event.target.getAttribute('data-id');
-  const response = await fetch(`/api/concerts/${concert_id}`, {
-    method: 'POST',
-    body: JSON.stringify({ concert_id }),
-    headers: { 'Content-Type': 'application/json' },
-  });
-  if (response.ok) {
-    document.location.replace('/profile');
-  } else {
-    alert('Failed to add concert');
-  }
-};
-
 const newDeleteHandler = async (event) => {
   event.preventDefault();
   const concert_id = event.target.getAttribute('data-id');
@@ -53,6 +38,7 @@ async function calendarSaveHandler(title, start, url, event_id) {
   }
 }
 
+// creates search result cards 
 export async function newSearchHandler(event) {
   const userIdEl = document.querySelector('#userId');
   const userId = userIdEl.dataset.id;
@@ -101,7 +87,7 @@ export async function newSearchHandler(event) {
         eventsContainer.append(dateDetailsDiv, searchResultsDiv);
       });
 
-      // Apply styles for scrollable columns
+      // Apply styles for scrollable columns and allows link to open in new tab
       eventsContainer.style.display = 'flex';
       eventsContainer.style.overflowX = 'scroll';
       eventsContainer.style.maxWidth = '100%';
@@ -111,3 +97,21 @@ export async function newSearchHandler(event) {
     }
   }
 };
+
+
+// TO DELETE
+
+// const newAddHandler = async (event) => {
+//   event.preventDefault();
+//   const concert_id = event.target.getAttribute('data-id');
+//   const response = await fetch(`/api/concerts/${concert_id}`, {
+//     method: 'POST',
+//     body: JSON.stringify({ concert_id }),
+//     headers: { 'Content-Type': 'application/json' },
+//   });
+//   if (response.ok) {
+//     document.location.replace('/profile');
+//   } else {
+//     alert('Failed to add concert');
+//   }
+// };
