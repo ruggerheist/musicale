@@ -4,6 +4,7 @@ const withAuth = require('../../utils/auth');
 
 //The /api/concerts endpoint
 
+// gets concerts based on user_id
 router.get('/', withAuth, async (req, res) => {
     try {
         //we need to use UserConcert because that is what has the association with the user
@@ -24,6 +25,7 @@ router.get('/', withAuth, async (req, res) => {
     }
 });
 
+// creates concert based on user save 
 router.post('/', withAuth, async (req, res) => {
     // console.log(res);
     try {
@@ -54,6 +56,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+// deletes concert by user 
 router.delete('/:id', withAuth, async (req, res) => {
     try {
         const concertData = await Concert.destroy({

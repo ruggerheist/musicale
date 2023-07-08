@@ -36,7 +36,7 @@ const newSaveHandler = async (event) => {
     }
   };
   
-  // Wrote this function for the save button on the calendar
+  // function for the save button on the calendar
   async function calendarSaveHandler(title, start, url, event_id) {
     const response = await fetch(`/api/concerts`, {
       method: 'POST',
