@@ -18,7 +18,7 @@ router.get("/login", async (req, res) => {
   }
 });
 
-// rdners signup page for users to sign up for an account
+// renders signup page for users to sign up for an account
 router.get("/signup", async (req, res) => {
   try {
     res.render("signup");
