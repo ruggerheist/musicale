@@ -56,6 +56,7 @@ router.get('/concerts', async (req, res) => {
         as: 'concerts_attended_by_user'
       }]
     });
+    console.log(userData)
     res.status(200).json(userData.concerts_attended_by_user);
   } catch (err) {
     res.status(500).json(err);

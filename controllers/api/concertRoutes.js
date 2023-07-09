@@ -53,27 +53,4 @@ router.delete('/:id', withAuth, async (req, res) => {
     }
 });
 
-
-// TO DELETE
-// gets concerts based on user_id
-// router.get('/', withAuth, async (req, res) => {
-//     try {
-//         //we need to use UserConcert because that is what has the association with the user
-//         const concertData = await UserConcert.findAll({
-//         where: {
-//             user_id: req.session.user_id
-//         }
-//         });
-
-//         const concerts = concertData.map((concert) => concert.get({ plain: true }));
-
-//         res.render('concerts', {
-//         concerts,
-//         logged_in: req.session.logged_in
-//         });
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-// });
-
 module.exports = router;
