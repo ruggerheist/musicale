@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+// renders login page as homepage 
 router.get("/", async (req, res) => {
   try {
     res.render("login");
@@ -8,6 +9,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+// renders login page using login route
+router.get("/login", async (req, res) => {
+  try {
+    res.render("login");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// rdners signup page for users to sign up for an account
+router.get("/signup", async (req, res) => {
+  try {
+    res.render("signup");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// renders main calendar view 
 router.get("/calendar", async (req, res) => {
   try {
     res.render("calendar", { user_id: req.session.user_id });
@@ -16,6 +36,7 @@ router.get("/calendar", async (req, res) => {
   }
 });
 
+// fetches ticketmaster api data for searched city and renders it unto main page 
 router.get('/searchcity/:city', async (req, res) => {
   try {
     const city = req.params.city;
@@ -49,34 +70,5 @@ router.get('/searchcity/:city', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-router.get("/login", async (req, res) => {
-  try {
-    res.render("login");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-router.get("/signup", async (req, res) => {
-  try {
-    res.render("signup");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// Logout
-router.post('/logout', async (req, res) => {
-  try {
-    req.session.destroy(() => {
-      res.redirect("/login");
-    });
-  } catch (err) {
-    res.status(500).json(err);
-    console.log(err);
-  }
-});
-
 
 module.exports = router;

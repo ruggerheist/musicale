@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     // styling for calendar
-  // calendarEl.style.display = 'block'; 
-  calendarEl.style.width = '800px';
-  calendarEl.style.marginLeft = '150px';
-
+    // calendarEl.style.display = 'block'; 
+    calendarEl.style.width = '800px';
+    calendarEl.style.marginLeft = '150px';
     calendar.render();
+    document.querySelectorAll('.fc-event').forEach(ticketLink => ticketLink.setAttribute('target', '_blank'));
   } else {
     alert('Error in getting concerts!')
   }

@@ -39,5 +39,3 @@ Concert.init(
 );
 
 module.exports = Concert;
-
-// do we want to include time or is date enough?
