@@ -71,4 +71,16 @@ router.get('/searchcity/:city', async (req, res) => {
   }
 });
 
+// Logout
+router.post('/logout', async (req, res) => {
+  try {
+    req.session.destroy(() => {
+      res.redirect("/login");
+    });
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+});
+
 module.exports = router;
