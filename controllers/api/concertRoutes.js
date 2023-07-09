@@ -36,21 +36,20 @@ router.post('/', withAuth, async (req, res) => {
 // deletes concert by user 
 router.delete('/:id', withAuth, async (req, res) => {
     try {
-        const concertData = await Concert.destroy({
+        const concertData = await UserConcert.destroy({
             where: {
-                id: req.params.id,
+                concert_id: req.params.id,
                 user_id: req.session.user_id,
             },
         });
-
         if (!concertData) {
             res.status(404).json({ message: 'No concert found with this id!' });
             return;
         }
-
         res.status(200).json(concertData);
     } catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }
 });
 

@@ -6,22 +6,22 @@ const newSearch = async (event) => {
     }
 };
 
-const deleteConcert = async (event) => {
-    event.preventDefault();
+// const deleteConcert = async (event) => {
+//     event.preventDefault();
 
-    const concert_id = event.target.getAttribute('data-id');
-    const response = await fetch(`/api/concerts/${concert_id}`, {
-        method: 'DELETE',
-        body: JSON.stringify({ concert_id }),
-        headers: { 'Content-Type': 'application/json' },
-    });
+//     const concert_id = event.target.getAttribute('data-id');
+//     const response = await fetch(`/api/concerts/${concert_id}`, {
+//         method: 'DELETE',
+//         body: JSON.stringify({ concert_id }),
+//         headers: { 'Content-Type': 'application/json' },
+//     });
 
-    if (response.ok) {
-        document.location.replace('/profile');
-    } else {
-        alert('Failed to delete concert');
-    }
-};
+//     if (response.ok) {
+//         document.location.replace('/profile');
+//     } else {
+//         alert('Failed to delete concert');
+//     }
+// };
 
 // TO DELETE
 
