@@ -53,7 +53,8 @@
       text-align: center;
       margin-bottom: 10px;
     }
-        /* Custom CSS for date details column */
+    
+    /* Custom CSS for date details column */
     #dateDetailsColumn {
       background: linear-gradient(to bottom, #21106d, #0e0864c7);
       color: #fff;
@@ -63,7 +64,6 @@
   </style>
 </head>
 <body>
-
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-with-padding">
     <a class="navbar-brand" href="#">Musicale</a>
@@ -76,7 +76,7 @@
     </form>
 
     <!-- Login/Logout Buttons -->
-    <div class="ml-auto">
+    <div class="ml-auto" id="loginLogoutContainer">
       <a id="loginButton" class="btn btn-outline-light" href="http://127.0.0.1:3001/login">Login</a>
       <button id="logoutButton" class="btn btn-outline-light" type="button">Logout</button>
     </div>
@@ -84,42 +84,64 @@
 
   <div class="container mt-4">
     <div class="row">
-     
       <div class="col-6">
         <div id="calendar"></div>
-        <input type="hidden" data-id={{user_id}} id="userId" />
+        <input type="hidden" data-id="{{user_id}}" id="userId" />
       </div>
     </div>
 
-    <div id="event-results"></div>
-
+<div id="event-results" style="margin-top: 20px;"></div>
   </div>
 
   <script type="module" src="./js/calendar.js"></script>
   <script type="module" src="./js/handlers.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<script>
-  // Logout button
-  var logoutButton = document.getElementById('logoutButton');
+  <script>
+    // Check authentication status
+    var isAuthenticated = true; // Set this to true if the user is authenticated
 
-  logoutButton.addEventListener('click', function() {
-    fetch('/logout', {
-      method: 'POST',
-      credentials: 'same-origin' // <-- includes cookies in the request
-    })
-    .then(function(response) {
-      if (response.ok) {
-        // Successful logout? Send the user back to the login page
-        window.location.href = '/login'; // Redirect to login page
+    // Function to update the visibility of login/logout buttons
+    function updateLoginLogoutVisibility() {
+      var loginButton = document.getElementById('loginButton');
+      var logoutButton = document.getElementById('logoutButton');
+
+      if (isAuthenticated) {
+        // User is logged in, show logout button
+        loginButton.style.display = 'none';
+        logoutButton.style.display = 'block';
       } else {
-        // Logout failed, handle the error
-        console.error('Logout failed with status ' + response.status);
+        // User is logged out, show login button
+        loginButton.style.display = 'block';
+        logoutButton.style.display = 'none';
       }
-    })
-    .catch(function(error) {
-      console.error('An error occurred during logout:', error);
+    }
+
+    // Event listener for logout button
+    var logoutButton = document.getElementById('logoutButton');
+    logoutButton.addEventListener('click', function() {
+      // Perform logout logic here
+      isAuthenticated = false;
+      updateLoginLogoutVisibility();
+      fetch('/logout', {
+        method: 'POST',
+        credentials: 'same-origin' // <-- includes cookies in the request
+      })
+      .then(function(response) {
+        if (response.ok) {
+          // Successful logout? Send the user back to the login page
+          window.location.href = '/login'; // Redirect to login page
+        } else {
+          // Logout failed, handle the error
+          console.error('Logout failed with status ' + response.status);
+        }
+      })
+      .catch(function(error) {
+        console.error('An error occurred during logout:', error);
+      });
     });
-  });
-</script>
+
+    // Initial visibility update
+    updateLoginLogoutVisibility();
+  </script>
 </body>
