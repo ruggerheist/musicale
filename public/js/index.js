@@ -1,10 +1,10 @@
-const newSearch = async (event) => {
-    event.preventDefault();
-    const search = document.querySelector('#search').value.trim();
-    if (search) {
-        document.location.replace(`/search/${search}`);
-    }
-};
+// const newSearch = async (event) => {
+//     event.preventDefault();
+//     const search = document.querySelector('#search').value.trim();
+//     if (search) {
+//         document.location.replace(`/search/${search}`);
+//     }
+// };
 
 // const deleteConcert = async (event) => {
 //     event.preventDefault();

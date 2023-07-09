@@ -1,11 +1,3 @@
-const newSaveHandler = async (event) => {
-  event.preventDefault();
-  const search = document.querySelector('#search').value.trim();
-  if (search) {
-    document.location.replace(`/search/${search}`);
-  }
-};
-
 // function for the save button on the calendar
 async function calendarSaveHandler(title, start, url, event_id) {
   const response = await fetch(`/api/concerts`, {
@@ -21,7 +13,7 @@ async function calendarSaveHandler(title, start, url, event_id) {
   } else {
     alert('Failed to save concert');
   }
-}
+};
 
 // creates search result cards 
 export async function newSearchHandler(event) {
@@ -83,20 +75,10 @@ export async function newSearchHandler(event) {
   }
 };
 
-export const newDeleteHandler = (event) => {
-  event.preventDefault();
-  const concert_id = event.user_concert.concert_id;
-  console.log(concert_id)
-  const confirmation = confirm('Are you sure you want to delete this concert?');
-  if (confirmation) {
-    deleteConcert(concert_id);
-  }
-};
-
+// fetch to delete concert from users concerts 
 export const deleteConcert = async (concert_id) => {
   const response = await fetch(`/api/concerts/${concert_id}`, {
     method: 'DELETE',
-    // headers: { 'Content-Type': 'application/json' },
   });
   if (response.ok) {
     document.location.replace('/calendar');
@@ -104,37 +86,3 @@ export const deleteConcert = async (concert_id) => {
     alert('Failed to delete concert');
   }
 };
-
-
-
-// const newDeleteHandler = async (event) => {
-//   event.preventDefault();
-//   const concert_id = event.target.getAttribute('data-id');
-//   const response = await fetch(`/api/concerts/${concert_id}`, {
-//     method: 'DELETE',
-//     body: JSON.stringify({ concert_id }),
-//     headers: { 'Content-Type': 'application/json' },
-//   });
-//   if (response.ok) {
-//     document.location.replace('/profile');
-//   } else {
-//     alert('Failed to delete concert');
-//   }
-// };
-
-// TO DELETE
-
-// const newAddHandler = async (event) => {
-//   event.preventDefault();
-//   const concert_id = event.target.getAttribute('data-id');
-//   const response = await fetch(`/api/concerts/${concert_id}`, {
-//     method: 'POST',
-//     body: JSON.stringify({ concert_id }),
-//     headers: { 'Content-Type': 'application/json' },
-//   });
-//   if (response.ok) {
-//     document.location.replace('/profile');
-//   } else {
-//     alert('Failed to add concert');
-//   }
-// };

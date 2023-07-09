@@ -13,28 +13,31 @@ document.addEventListener('DOMContentLoaded', async function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       events: userConcertsData,
+      // click event to open ticket link in new tab
       eventClick: function (info) {
         info.jsEvent.preventDefault(); // don't let the browser navigate
+        console.log(info.jsEvent)
         if (info.event.url) {
           window.open(info.event.url);
         }
       },
+      // mouse over event to get x to appear to delete concert
       eventMouseEnter: function (info) {
         const deleteIcon = document.createElement('span');
         deleteIcon.textContent = 'X';
         deleteIcon.className = 'delete-icon';
         info.el.appendChild(deleteIcon);
         const concert_id = info.event._def.extendedProps.user_concert.concert_id;
-        console.log(concert_id)
         deleteIcon.addEventListener('click', (event) => {
           event.preventDefault();
-          console.log(concert_id)
+          event.stopPropagation();
           const confirmation = confirm('Are you sure you want to delete this concert?');
           if (confirmation) {
             deleteConcert(concert_id);
           }
         });
       },
+      // mouse leave event to get X to disappear 
       eventMouseLeave: function (info) {
         const deleteIcon = document.querySelector('.delete-icon');
         deleteIcon.parentNode.removeChild(deleteIcon);
@@ -42,7 +45,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     });
 
     // styling for calendar
-    // calendarEl.style.display = 'block'; 
     calendarEl.style.width = '800px';
     calendarEl.style.marginLeft = '150px';
     calendar.render();
