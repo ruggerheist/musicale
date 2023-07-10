@@ -8,16 +8,22 @@
  * [Installation](#installation) 
  * [Usage](#usage) 
  * [License](#license) 
- * [Contributing](#contributing) 
- * [Tests](#tests) 
- * [Questions](#questions)
+ * [Technologies](#technologies) 
+ * [Deployed Application](#deployed-application)
 
   ## Installation
 
-  To install this project locally use the following prompts in your command line:
-  mysql -u root -p > source/db.schema.sql
-  npm i
+  For installation, type the following commands into the command line.
+  To install packages:
+    npm i
+
+  To connect to the MySQL shell:
+    mysql -u root -p > source/db.schema.sql
+ 
+  To seed the database:
   npm run seed
+
+  To start the server:
   node server
 
   ## Usage
@@ -26,7 +32,15 @@
 
   ## License 
 
-This application is licensed under the [MIT license.](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)
+  This application is licensed under the [MIT license.](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)
+
+  ## Technologies
+
+  * [Full Calendar JavaScript Library](https://fullcalendar.io/docs)
+  * [Ticketmaster API](https://developer.ticketmaster.com/products-and-docs/apis/getting-started/)
+  * [Bootstrap](https://getbootstrap.com/)
 
   ## Deployed Application
+  [Deployed Application](https://musicale-app-f8a5312a774d.herokuapp.com/)
+  ![image](./public/images/deployed_app.gif)
   
