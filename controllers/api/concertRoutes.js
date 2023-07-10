@@ -12,7 +12,6 @@ router.post('/', withAuth, async (req, res) => {
                 event_id: req.body.event_id
             }
         })
-        console.log(existingConcert)
         let newConcert;
         if (!existingConcert) {
             newConcert = await Concert.create(req.body)
@@ -49,7 +48,6 @@ router.delete('/:id', withAuth, async (req, res) => {
         res.status(200).json(concertData);
     } catch (err) {
         res.status(500).json(err);
-        console.log(err);
     }
 });
 

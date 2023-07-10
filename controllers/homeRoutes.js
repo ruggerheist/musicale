@@ -49,7 +49,6 @@ router.get('/searchcity/:city', async (req, res) => {
     const searchData = await response.json();
     const events = searchData._embedded.events;
     const renderEvents = events.map(eventData => {
-      console.log(eventData._embedded);
       let ticketData;
       try {
         ticketData = eventData.url;
@@ -79,7 +78,6 @@ router.post('/logout', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
-    console.log(err);
   }
 });
 

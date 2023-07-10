@@ -5,12 +5,9 @@ async function calendarSaveHandler(title, start, url, event_id) {
     body: JSON.stringify({ title, start, url, event_id }),
     headers: { 'Content-Type': 'application/json' },
   });
-  console.log(response);
   if (response.ok) {
     alert('Concert saved!');
-    // document.location.replace('/profile');
     const data = await response.json();
-    // console.log('saved', data)
   } else {
     alert('Failed to save concert');
   }
