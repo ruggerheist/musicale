@@ -2,7 +2,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
   ## Description
-  This application combines the functionality of ticketmaster with the organization that a calendar provides. Users are able to search for concerts by city and save them to their calendar to easily see the upcoming music events they are interested in or have purchased tickets for. 
+  This application combines the functionality of Ticketmaster with the organization that a calendar provides. Users are able to search for concerts by city and save them to their calendar to easily see the upcoming music events they are interested in or have purchased tickets for. 
 
   ## Table of Contents 
  * [Installation](#installation) 
@@ -14,17 +14,18 @@
   ## Installation
 
   For installation, type the following commands into the command line.
-  To install packages:
-    npm i
+  
+    To install packages:
+      npm i
 
-  To connect to the MySQL shell:
-    mysql -u root -p > source/db.schema.sql
+    To connect to the MySQL shell:
+      mysql -u root -p > source/db.schema.sql
  
-  To seed the database:
-  npm run seed
+    To seed the database:
+      npm run seed
 
-  To start the server:
-  node server
+    To start the server:
+      node server
 
   ## Usage
 
