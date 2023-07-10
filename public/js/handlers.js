@@ -7,6 +7,7 @@ async function calendarSaveHandler(title, start, url, event_id) {
   });
   console.log(response);
   if (response.ok) {
+    alert('Concert saved!');
     // document.location.replace('/profile');
     const data = await response.json();
     // console.log('saved', data)
@@ -17,8 +18,6 @@ async function calendarSaveHandler(title, start, url, event_id) {
 
 // creates search result cards 
 export async function newSearchHandler(event) {
-  const userIdEl = document.querySelector('#userId');
-  const userId = userIdEl.dataset.id;
   event.preventDefault();
   let renderEvents;
   const searchInput = document.querySelector('#search-input').value.trim();
@@ -34,7 +33,9 @@ export async function newSearchHandler(event) {
       const eventsContainer = document.getElementById('event-results');
       eventsContainer.innerHTML = '';
       let parsedEvents = JSON.parse(renderEvents);
-
+      parsedEvents.sort(function (a, b) {
+        return new Date(a.date) - new Date(b.date);
+      });
       parsedEvents.forEach((renderEvent) => {
         const dateDetailsDiv = document.createElement('div');
         const searchResultsDiv = document.createElement('div');
@@ -59,6 +60,7 @@ export async function newSearchHandler(event) {
         addButton.addEventListener('click', function () {
           calendarSaveHandler(renderEvent.name, renderEvent.date, renderEvent.tickets, renderEvent.event_id);
           document.location.replace('/calendar');
+          newSearchHandler(searchInput);
         });
         searchResultsDiv.append(cardBodyDiv, addButton);
         eventsContainer.append(dateDetailsDiv, searchResultsDiv);
