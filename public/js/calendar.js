@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       events: userConcertsData,
       // click event to open ticket link in new tab
       eventClick: function (info) {
-        info.jsEvent.preventDefault(); // don't let the browser navigate
-        console.log(info.jsEvent)
+        info.jsEvent.preventDefault(); 
         if (info.event.url) {
           window.open(info.event.url);
         }
@@ -26,6 +25,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         const deleteIcon = document.createElement('span');
         deleteIcon.textContent = 'X';
         deleteIcon.className = 'delete-icon';
+        deleteIcon.style.fontWeight = 'bold';
+        deleteIcon.style.color = '#ff5757';
+        deleteIcon.style.paddingLeft = '50%';
         info.el.appendChild(deleteIcon);
         const concert_id = info.event._def.extendedProps.user_concert.concert_id;
         deleteIcon.addEventListener('click', (event) => {
